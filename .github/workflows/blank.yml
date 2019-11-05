@@ -1,0 +1,20 @@
+name: On push
+
+on:
+  pull_request:
+    branches: 
+      - master
+  
+jobs:
+  main:
+    strategy:
+      matrix:
+        config:
+          - {os: "ubuntu-18.04", container: "linuxbrew/brew" }
+          - {os: "macos-10.14", container: "" }
+    runs-on: ${{ matrix.config.os }}
+    container: ${{ matrix.config.container }}
+    steps:
+      - name: brew config
+        run: |
+          brew config
